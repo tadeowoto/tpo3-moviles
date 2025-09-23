@@ -4,14 +4,42 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tpo3_productos.databinding.FragmentGalleryBinding;
+import com.example.tpo3_productos.databinding.FragmentListaProductosBinding;
+import com.example.tpo3_productos.modelo.ProductoAdapter;
 
 public class ListaProductosFragment extends Fragment {
 
+    private ListaProductosViewModel vm;
+    private FragmentListaProductosBinding binding;
 
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
+        // preguntar por la inicializacion con Android Factory
+        vm = new ViewModelProvider(this).get(ListaProductosViewModel.class);
+        binding = FragmentListaProductosBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        vm.getProductos().observe(getViewLifecycleOwner(), productos -> {
+            ProductoAdapter adapter = new ProductoAdapter(productos, getContext(), getLayoutInflater());
+            //aca deberia cambiar el false para que cambie de forma alfabetica por descripcion ???????
+            GridLayoutManager glm = new GridLayoutManager(getContext(), 1, LinearLayoutManager.VERTICAL, false);
+            binding.lista.setLayoutManager(glm);
+            binding.lista.setAdapter(adapter);
+        });
+        vm.cargarProductos();
+        return root;
+    }
 }
