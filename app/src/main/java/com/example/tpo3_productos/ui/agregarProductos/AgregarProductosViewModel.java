@@ -19,6 +19,7 @@ public class AgregarProductosViewModel extends AndroidViewModel {
     MutableLiveData<String> errorPrecio;
     MutableLiveData<String> exito;
 
+
     public AgregarProductosViewModel(@NonNull Application application) {
         super(application);
     }
@@ -29,12 +30,14 @@ public class AgregarProductosViewModel extends AndroidViewModel {
         }
         return errorCodigo;
     }
+
     public LiveData<String> getErrorDescripcion(){
         if(errorDescripcion == null){
             errorDescripcion = new MutableLiveData<>();
         }
         return errorDescripcion;
     }
+
     public LiveData<String> getErrorPrecio(){
         if(errorPrecio == null){
             errorPrecio = new MutableLiveData<>();
@@ -49,11 +52,14 @@ public class AgregarProductosViewModel extends AndroidViewModel {
         return exito;
     }
 
-    public void validateForm(String codigo, String descripcion, float precio){
+    public void validateForm(String codigo, String descripcion, String precioTexto){
 
-        limpiarErrores();
+        codigo = codigo.trim();
+        descripcion = descripcion.trim();
+        precioTexto = precioTexto.trim();
 
         boolean hayErrores = false;
+
         if(codigo.isEmpty()){
             errorCodigo.setValue("El código no puede estar vacío");
             hayErrores = true;
@@ -67,28 +73,41 @@ public class AgregarProductosViewModel extends AndroidViewModel {
             }
         }
 
+
         if(descripcion.isEmpty()){
             errorDescripcion.setValue("La descripción no puede estar vacía");
             hayErrores = true;
         }
 
-
-        if(precio <= 0){
-            errorPrecio.setValue("El precio debe ser mayor a 0");
+        float precio = 0f;
+        if(precioTexto.isEmpty()){
+            errorPrecio.setValue("El precio no puede estar vacío");
             hayErrores = true;
+        } else {
+            try {
+                precio = Float.parseFloat(precioTexto);
+                if(precio <= 0){
+                    errorPrecio.setValue("El precio debe ser mayor a 0");
+                    hayErrores = true;
+                }
+            } catch (NumberFormatException e) {
+                errorPrecio.setValue("Formato de precio inválido");
+                hayErrores = true;
+            }
         }
 
+
         if(!hayErrores){
+            limpiarErrores();
             Producto producto = new Producto(codigo, descripcion, precio);
             listaProductos.add(producto);
             exito.setValue("Producto agregado exitosamente");
-            limpiarErrores();
         }
     }
-    private void limpiarErrores() {
-        if(errorCodigo != null) errorCodigo.setValue("");
-        if(errorDescripcion != null) errorDescripcion.setValue("");
-        if(errorPrecio != null) errorPrecio.setValue("");
-        if(exito != null) exito.setValue("");
+
+    private void limpiarErrores(){
+        errorCodigo.setValue("");
+        errorDescripcion.setValue("");
+        errorPrecio.setValue("");
     }
 }

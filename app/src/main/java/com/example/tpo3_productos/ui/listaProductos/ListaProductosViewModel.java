@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class ListaProductosViewModel extends AndroidViewModel {
 
     public MutableLiveData<ArrayList<Producto>> productos;
+    public MutableLiveData<String> noHayProductos;
 
     public ListaProductosViewModel(@NonNull Application application) {
         super(application);
@@ -27,6 +28,12 @@ public class ListaProductosViewModel extends AndroidViewModel {
         return productos;
     }
 
+    public LiveData<String> getNoHayProductos(){
+        if(noHayProductos == null){
+            noHayProductos = new MutableLiveData<>();
+        }
+        return noHayProductos;
+    }
     ArrayList<Producto> lista = new ArrayList<>(MainActivity.listaProductos);
 
 

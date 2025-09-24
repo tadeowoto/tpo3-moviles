@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,22 +28,9 @@ public class AgregarProductoFragment extends Fragment {
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String codigo = binding.inputCodigo.getText().toString().trim();
-                String descripcion = binding.inputDescripcion.getText().toString().trim();
-                String precioTexto = binding.inputPrecio.getText().toString().trim();
-
-                float precio = 0f;
-                try {
-                    if (!precioTexto.isEmpty()) {
-                        precio = Float.parseFloat(precioTexto);
-                    }
-                } catch (NumberFormatException e) {
-                    binding.tvErrorPrecio.setText("Formato de precio inválido");
-                    binding.tvErrorPrecio.setVisibility(View.VISIBLE);
-                    return;
-                }
-
+                String codigo = binding.inputCodigo.getText().toString();
+                String descripcion = binding.inputDescripcion.getText().toString();
+                String precio = binding.inputPrecio.getText().toString();
                 vm.validateForm(codigo, descripcion, precio);
             }
         });
@@ -63,16 +51,9 @@ public class AgregarProductoFragment extends Fragment {
         });
 
         vm.getExito().observe(getViewLifecycleOwner(), exito -> {
-            if (exito != null && !exito.isEmpty()) {
-                binding.tvExito.setText(exito);
-                binding.cardExito.setVisibility(View.VISIBLE);
-                limpiarCampos();
-                binding.getRoot().postDelayed(() -> {
-                    if (binding != null) {
-                        binding.cardExito.setVisibility(View.GONE);
-                    }
-                }, 3000);
-            }
+            Toast toast = Toast.makeText(getContext(), exito, Toast.LENGTH_LONG);
+            limpiarCampos();
+            toast.show();
         });
 
         return root;
