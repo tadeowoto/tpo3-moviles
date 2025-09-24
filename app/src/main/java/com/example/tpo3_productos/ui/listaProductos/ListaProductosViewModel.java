@@ -44,7 +44,6 @@ public class ListaProductosViewModel extends AndroidViewModel {
 
     public void cargarProductos() {
         if(lista.isEmpty()){
-            // Podria cargar un Skeleton o algo asi
             noHayProductos.setValue("No hay productos");
         } else {
             ArrayList<Producto> listaOrdenada = new ArrayList<>(MainActivity.listaProductos);
