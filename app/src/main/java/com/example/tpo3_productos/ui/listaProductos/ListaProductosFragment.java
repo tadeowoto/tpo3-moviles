@@ -35,6 +35,7 @@ public class ListaProductosFragment extends Fragment {
                 binding.lista.setAdapter(adapter);
         });
         vm.getNoHayProductos().observe(getViewLifecycleOwner(), noHayProductos -> {
+            binding.tvError.setVisibility(View.VISIBLE);
             binding.tvError.setText(noHayProductos);
         });
         vm.cargarProductos();
