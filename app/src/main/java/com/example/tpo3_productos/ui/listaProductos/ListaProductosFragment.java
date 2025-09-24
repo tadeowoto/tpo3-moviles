@@ -25,8 +25,6 @@ public class ListaProductosFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         // preguntar por la inicializacion con Android Factory
         vm = new ViewModelProvider(this).get(ListaProductosViewModel.class);
         binding = FragmentListaProductosBinding.inflate(inflater, container, false);
