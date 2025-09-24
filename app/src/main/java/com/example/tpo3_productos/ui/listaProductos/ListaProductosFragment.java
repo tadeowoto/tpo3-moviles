@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tpo3_productos.databinding.FragmentGalleryBinding;
 import com.example.tpo3_productos.databinding.FragmentListaProductosBinding;
 import com.example.tpo3_productos.modelo.ProductoAdapter;
 
@@ -31,11 +30,10 @@ public class ListaProductosFragment extends Fragment {
         View root = binding.getRoot();
 
         vm.getProductos().observe(getViewLifecycleOwner(), productos -> {
-            ProductoAdapter adapter = new ProductoAdapter(productos, getContext(), getLayoutInflater());
-            //aca deberia cambiar el false para que cambie de forma alfabetica por descripcion ???????
-            GridLayoutManager glm = new GridLayoutManager(getContext(), 1, LinearLayoutManager.VERTICAL, false);
-            binding.lista.setLayoutManager(glm);
-            binding.lista.setAdapter(adapter);
+                ProductoAdapter adapter = new ProductoAdapter(productos, getContext(), getLayoutInflater());
+                GridLayoutManager glm = new GridLayoutManager(getContext(), 1, LinearLayoutManager.VERTICAL, false);
+                binding.lista.setLayoutManager(glm);
+                binding.lista.setAdapter(adapter);
         });
         vm.cargarProductos();
         return root;
