@@ -34,6 +34,9 @@ public class ListaProductosFragment extends Fragment {
                 binding.lista.setLayoutManager(glm);
                 binding.lista.setAdapter(adapter);
         });
+        vm.getNoHayProductos().observe(getViewLifecycleOwner(), noHayProductos -> {
+            binding.tvError.setText(noHayProductos);
+        });
         vm.cargarProductos();
         return root;
     }

@@ -37,9 +37,17 @@ public class ListaProductosViewModel extends AndroidViewModel {
     ArrayList<Producto> lista = new ArrayList<>(MainActivity.listaProductos);
 
 
+
+
+
     public void cargarProductos() {
-        ArrayList<Producto> lista = new ArrayList<>(MainActivity.listaProductos);
-        productos.setValue(lista);
+        if(lista.isEmpty()){
+            // Podria cargar un Skeleton o algo asi
+            noHayProductos.setValue("No hay productos");
+        } else {
+            ArrayList<Producto> lista = new ArrayList<>(MainActivity.listaProductos);
+            productos.setValue(lista);
+        }
     }
 
 }
