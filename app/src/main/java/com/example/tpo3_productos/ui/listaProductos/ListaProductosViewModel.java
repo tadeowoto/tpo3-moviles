@@ -11,6 +11,8 @@ import com.example.tpo3_productos.MainActivity;
 import com.example.tpo3_productos.modelo.Producto;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ListaProductosViewModel extends AndroidViewModel {
 
@@ -45,8 +47,15 @@ public class ListaProductosViewModel extends AndroidViewModel {
             // Podria cargar un Skeleton o algo asi
             noHayProductos.setValue("No hay productos");
         } else {
-            ArrayList<Producto> lista = new ArrayList<>(MainActivity.listaProductos);
-            productos.setValue(lista);
+            ArrayList<Producto> listaOrdenada = new ArrayList<>(MainActivity.listaProductos);
+
+            listaOrdenada.sort(new Comparator<Producto>() {
+                @Override
+                public int compare(Producto p1, Producto p2) {
+                    return p1.getDescripcion().compareToIgnoreCase(p2.getDescripcion());
+                }
+            });
+            productos.setValue(listaOrdenada);
         }
     }
 
