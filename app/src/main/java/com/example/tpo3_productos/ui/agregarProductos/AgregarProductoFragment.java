@@ -60,7 +60,6 @@ public class AgregarProductoFragment extends Fragment {
     }
 
     private void limpiarCampos(){
-        //Esto puede estar aca profe? no es logica creo...
         binding.inputCodigo.setText("");
         binding.inputDescripcion.setText("");
         binding.inputPrecio.setText("");
