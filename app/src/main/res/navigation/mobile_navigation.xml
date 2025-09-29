@@ -22,4 +22,22 @@
         android:name="com.example.tpo3_productos.ui.salir.SalirFragment"
         android:label="@string/salir"
         tools:layout="@layout/fragment_salir" />
+    <fragment
+        android:id="@+id/eliminarFragment"
+        android:name="com.example.tpo3_productos.ui.eliminarProducto.EliminarFragment"
+        android:label="fragment_eliminar"
+        tools:layout="@layout/fragment_eliminar" >
+        <action
+            android:id="@+id/action_eliminarFragment_to_detalleProductoFragment"
+            app:destination="@id/detalleProductoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalleProductoFragment"
+        android:name="com.example.tpo3_productos.ui.detalleProducto.DetalleProductoFragment"
+        android:label="fragment_detalle_producto"
+        tools:layout="@layout/fragment_detalle_producto" >
+        <action
+            android:id="@+id/action_detalleProductoFragment_to_eliminarFragment"
+            app:destination="@id/eliminarFragment" />
+    </fragment>
 </navigation>
