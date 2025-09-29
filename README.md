@@ -15,6 +15,11 @@ Permite a los usuarios crear y visualizar productos en memoria, sin necesidad de
 - **Listar productos**:
     - Mostrar todos los productos agregados en un RecyclerView.
     - Ordenados alfabéticamente por descripción.
+      
+- - **Eliminar Producto**:
+    - Busca el producto por le codigo y lo muestra en otro fragment vinculado en el navigation. Ademas tiene un boton para eliminarlo al producto de la lista estatica.
+    - <img width="536" height="931" alt="Screenshot 2025-09-29 at 7 33 00 PM" src="https://github.com/user-attachments/assets/66db9b22-0630-425a-a217-6f830b6d8dc8" />
+
 
 - **Salir**:
     - Diálogo de confirmación antes de cerrar la aplicación.
