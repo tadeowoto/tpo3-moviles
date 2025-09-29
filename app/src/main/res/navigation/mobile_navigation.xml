@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/eliminarFragment"
         android:name="com.example.tpo3_productos.ui.eliminarProducto.EliminarFragment"
-        android:label="fragment_eliminar"
+        android:label="@string/eliminar_producto"
         tools:layout="@layout/fragment_eliminar" >
         <action
             android:id="@+id/action_eliminarFragment_to_detalleProductoFragment"
@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/detalleProductoFragment"
         android:name="com.example.tpo3_productos.ui.detalleProducto.DetalleProductoFragment"
-        android:label="fragment_detalle_producto"
+        android:label="detalle del producto"
         tools:layout="@layout/fragment_detalle_producto" >
         <action
             android:id="@+id/action_detalleProductoFragment_to_eliminarFragment"
